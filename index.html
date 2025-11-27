@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdamBskr - Portofolio Pribadi</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        /* CSS Custom */
+        :root {
+            --brand-red: #C40000;
+            --brand-red-accent: #E53935;
+            --brand-white: #FFFFFF;
+            --brand-white-soft: #F5F5F5;
+            --brand-black: #1A1A1A;
+            --brand-grey: #DDDDDD;
+            
+            --bg-color: var(--brand-white);
+            --bg-secondary-color: var(--brand-white-soft);
+            --text-color: var(--brand-black);
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --border-color: var(--brand-grey);
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --bg-secondary-color: #1e1e1e;
+            --text-color: var(--brand-white-soft);
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            --border-color: #444;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .bg-secondary-custom {
+             background-color: var(--bg-secondary-color);
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinner-border {
+            color: var(--brand-red);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--bg-color) !important;
+            box-shadow: var(--card-shadow);
+            transition: background-color 0.3s;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--brand-red) !important;
+        }
+        .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: var(--brand-red) !important;
+        }
+        #dark-mode-toggle {
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Tombol Utama */
+        .btn-brand {
+            background-color: var(--brand-red);
+            color: var(--brand-white);
+            border-radius: 8px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.3s;
+            border: none;
+        }
+        .btn-brand:hover {
+            background-color: var(--brand-red-accent);
+            color: var(--brand-white);
+            transform: translateY(-2px);
+        }
+        
+        /* Home Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        #home .profile-img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--brand-red);
+            box-shadow: var(--card-shadow);
+        }
+        #home h1 {
+            color: var(--brand-red);
+        }
+
+        /* Card Style */
+        .card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .skill-icon i {
+            font-size: 3rem;
+            color: var(--brand-red);
+        }
+        
+        /* Portfolio & Gallery */
+        .gallery-item {
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .gallery-item img {
+            transition: transform 0.5s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Contact Form */
+        .form-control {
+            background-color: var(--bg-secondary-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+        .form-control:focus {
+            background-color: var(--bg-secondary-color);
+            color: var(--text-color);
+            border-color: var(--brand-red);
+            box-shadow: 0 0 0 0.25rem rgba(196, 0, 0, 0.25);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary-color);
+            padding: 40px 0;
+            color: var(--text-color);
+        }
+        footer .social-link {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        footer .social-link:hover {
+            color: var(--brand-red);
+        }
+
+        /* Animasi */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .fade-in {
+            animation: fadeInAnimation 1s ease-in forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInAnimation {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">AdamBskr</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <i id="dark-mode-toggle" class="bi bi-moon-stars-fill fs-5"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home -->
+    <section id="home" class="container section-padding">
+        <div class="row align-items-center justify-content-center text-center text-lg-start">
+            <div class="col-lg-5 col-md-8 mb-4 mb-lg-0">
+                <img src="adam1.jpeg" alt="Adam Baskara Sugiarto" class="profile-img fade-in">
+            </div>
+            <div class="col-lg-7 fade-in" style="animation-delay: 0.2s;">
+                <h1 class="display-4 fw-bold">Adam Baskara Sugiarto</h1>
+                <p class="lead my-3">Mahasiswa Bisnis Digital Semester 5</p>
+                <p class="fst-italic">"Pasoepati garis keras ngepunk yoben."</p>
+                <a href="#about" class="btn btn-brand mt-3 me-2">Tentang Saya</a>
+                <a href="#portfolio" class="btn btn-outline-danger mt-3 me-2" style="border-radius: 8px;">Lihat Portofolio</a>
+                <a href="#contact" class="btn btn-brand mt-3">Hubungi Saya</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me -->
+    <section id="about" class="section-padding bg-secondary-custom">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-md-8">
+                    <h2 class="fw-bold">Tentang Saya</h2>
+                    <p>Perjalanan, Visi, dan Misi Pribadi</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card p-4 fade-in">
+                        <h4 class="text-danger">Biodata Singkat</h4>
+                        <p>Saya adalah seorang mahasiswa yang dinamis dan bersemangat, dengan minat besar dalam dunia bisnis digital, kreativitas, dan manajemen. Saat ini sedang menempuh pendidikan untuk menjadi profesional yang kompeten.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                     <div class="card p-4 fade-in" style="animation-delay: 0.2s;">
+                        <h4 class="text-danger">Pendidikan & Minat</h4>
+                        <p>Fokus studi saya pada Bisnis Digital memberikan wawasan mendalam tentang marketing, analisis data, dan strategi online. Saya sangat tertarik pada bagaimana teknologi dapat membangun brand yang kuat dan berkelanjutan.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 mb-4">
+                     <div class="card p-4 fade-in" style="animation-delay: 0.4s;">
+                        <h4 class="text-danger">Visi & Misi</h4>
+                        <p>Visi saya adalah menjadi seorang inovator di industri digital. Misi saya adalah terus belajar, beradaptasi, dan berkolaborasi untuk menciptakan solusi bisnis yang berdampak positif bagi masyarakat luas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-md-8">
+                    <h2 class="fw-bold">Keahlian Saya</h2>
+                    <p>Tools dan Kemampuan yang Saya Kuasai</p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card p-4 fade-in">
+                        <div class="skill-icon mb-3"><i class="bi bi-megaphone-fill"></i></div>
+                        <h6>Digital Marketing</h6>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card p-4 fade-in" style="animation-delay: 0.1s;">
+                        <div class="skill-icon mb-3"><i class="bi bi-palette-fill"></i></div>
+                        <h6>Desain Grafis</h6>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card p-4 fade-in" style="animation-delay: 0.2s;">
+                        <div class="skill-icon mb-3"><i class="bi bi-people-fill"></i></div>
+                        <h6>Manajemen Media Sosial</h6>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card p-4 fade-in" style="animation-delay: 0.3s;">
+                        <div class="skill-icon mb-3"><i class="bi bi-bar-chart-fill"></i></div>
+                        <h6>Business Analysis</h6>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card p-4 fade-in" style="animation-delay: 0.4s;">
+                        <div class="skill-icon mb-3"><i class="bi bi-file-earmark-excel-fill"></i></div>
+                        <h6>Microsoft Office</h6>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card p-4 fade-in" style="animation-delay: 0.5s;">
+                        <div class="skill-icon mb-3"><i class="bi bi-easel-fill"></i></div>
+                        <h6>Canva & Editing</h6>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card p-4 fade-in" style="animation-delay: 0.6s;">
+                        <div class="skill-icon mb-3"><i class="bi bi-lightbulb-fill"></i></div>
+                        <h6>Content Creator</h6>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card p-4 fade-in" style="animation-delay: 0.7s;">
+                        <div class="skill-icon mb-3"><i class="bi bi-briefcase-fill"></i></div>
+                        <h6>Manajemen Proyek</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="section-padding bg-secondary-custom">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-md-8">
+                    <h2 class="fw-bold">Portofolio Karya</h2>
+                    <p>Beberapa Proyek dan Tugas Unggulan yang Pernah Saya Kerjakan</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card fade-in">
+                        <img src="https://plus.unsplash.com/premium_photo-1661347859297-859b8ae1d7c5?q=80&w=1198&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Proyek Kampus">
+                        <div class="card-body">
+                            <h5 class="card-title">Analisis Bisnis UKM</h5>
+                            <p class="card-text">Studi kasus dan perencanaan strategi digital untuk Usaha Kecil Menengah di bidang kuliner.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card fade-in" style="animation-delay: 0.2s;">
+                        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fDB8fHww" class="card-img-top" alt="Desain Konten">
+                        <div class="card-body">
+                            <h5 class="card-title">Desain Konten Instagram</h5>
+                            <p class="card-text">Membuat feed dan story design untuk brand fashion lokal menggunakan Canva dan Figma.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card fade-in" style="animation-delay: 0.4s;">
+                        <img src=https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViaW5hcnxlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="Event Organizer">
+                        <div class="card-body">
+                            <h5 class="card-title">Webinar Digital Marketing</h5>
+                            <p class="card-text">Menjadi bagian dari tim event organizer untuk seminar online dengan 200+ peserta.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-md-8">
+                    <h2 class="fw-bold">Galeri</h2>
+                    <p>Momen Kegiatan, Event, dan Karya Video</p>
+                </div>
+            </div>
+            <!-- Video -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8">
+                    <div class="ratio ratio-16x9 fade-in">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/6Mtj-ZdxfU8?si=Q68EKOwCxLIjsy0m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- Foto -->
+            <div class="row">
+                <div class="col-md-4 col-6 mb-4">
+                    <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#gallerhttps://via.placeholder.com/800x600.png?text=Kegiatan+KampuyModal" data-img-src="s">
+                        <img src="https://images.unsplash.com/photo-1763713379561-6ac60e2fc7fa?q=80&w=835&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded" alt="Galeri 1">
+                    </a>
+                </div>
+                 <div class="col-md-4 col-6 mb-4">
+                    <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img-src="https://via.placeholder.com/800x600.png?text=Organisasi">
+                        <img src="https://images.unsplash.com/photo-1763634048525-5ca118fe6c05?q=80&w=685&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded" alt="Galeri 2">
+                    </a>
+                </div>
+                 <div class="col-md-4 col-6 mb-4">
+                    <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img-src="https://via.placeholder.com/800x600.png?text=Event">
+                        <img src="https://unsplash.com/photos/a-group-of-people-standing-in-front-of-a-stage-y5ru9iEKw2I" class="img-fluid rounded" alt="Galeri 3">
+                    </a>
+                </div>
+                 <div class="col-md-4 col-6 mb-4">
+                    <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img-src="https://via.placeholder.com/800x600.png?text=Personal+Branding">
+                        <img src="https://via.placeholder.com/400x300.png?text=Personal+Branding" class="img-fluid rounded" alt="Galeri 4">
+                    </a>
+                </div>
+                 <div class="col-md-4 col-6 mb-4">
+                    <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img-src="https://via.placeholder.com/800x600.png?text=Dokumentasi+1">
+                        <img src="https://via.placeholder.com/400x300.png?text=Dokumentasi+1" class="img-fluid rounded" alt="Galeri 5">
+                    </a>
+                </div>
+                 <div class="col-md-4 col-6 mb-4">
+                    <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img-src="https://via.placeholder.com/800x600.png?text=Dokumentasi+2">
+                        <img src="https://via.placeholder.com/400x300.png?text=Dokumentasi+2" class="img-fluid rounded" alt="Galeri 6">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact -->
+    <section id="contact" class="section-padding bg-secondary-custom">
+        <div class="container">
+             <div class="row justify-content-center text-center mb-5">
+                <div class="col-md-8">
+                    <h2 class="fw-bold">Hubungi Saya</h2>
+                    <p>Mari terhubung dan berdiskusi lebih lanjut.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <div class="card p-4 h-100 justify-content-center fade-in">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-whatsapp fs-2 text-danger me-3"></i>
+                            <div>
+                                <h5>WhatsApp</h5>
+                                <a href="https://wa.me/qr/PAZ3IKTUYAWXC1" target="_blank" class="text-decoration-none" style="color: var(--text-color);">+62 XXX-XXXX-XXXX</a>
+                            </div>
+                        </div>
+                         <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-instagram fs-2 text-danger me-3"></i>
+                            <div>
+                                <h5>Instagram</h5>
+                                <a href="https://instagram.com/adambaskara_" target="_blank" class="text-decoration-none" style="color: var(--text-color);">@adambaskara_</a>
+                            </div>
+                        </div>
+                         <div class="d-flex align-items-center mb-4">
+                            <i class="bi bi-envelope-fill fs-2 text-danger me-3"></i>
+                            <div>
+                                <h5>Email</h5>
+                                <a href="mailto:adambs1927@gmail.com" class="text-decoration-none" style="color: var(--text-color);">adambs1927@gmail.com</a>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-brand">Download CV <i class="bi bi-download ms-2"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="card p-4 fade-in" style="animation-delay: 0.2s;">
+                        <h4 class="text-center mb-3">Kirim Pesan Cepat</h4>
+                         <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama Anda</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                             <div class="mb-3">
+                                <label for="email" class="form-label">Email Anda</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                             <div class="mb-3">
+                                <label for="message" class="form-label">Pesan</label>
+                                <textarea class="form-control" id="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-brand w-100">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <div class="mb-3">
+                <a href="https://wa.me/qr/PAZ3IKTUYAWXC1" target="_blank" class="social-link"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://instagram.com/adambaskara_" target="_blank" class="social-link"><i class="bi bi-instagram"></i></a>
+                <a href="mailto:adambs1927@gmail.com" class="social-link"><i class="bi bi-envelope-fill"></i></a>
+            </div>
+            <p class="mb-0">
+                <strong>Adam Baskara Sugiarto</strong><br>
+                Mahasiswa Bisnis Digital
+            </p>
+            <p>&copy; <span id="copyright-year"></span> AdamBskr. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- Gallery Modal -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="galleryModalLabel">Preview Gambar</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="" id="modalImage" class="img-fluid" alt="Preview">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // === Preloader Logic ===
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                preloader.style.transition = 'opacity 0.5s ease';
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            });
+
+            // === Dark Mode Logic ===
+            const toggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+            const icon = toggle;
+
+            // Cek preferensi dari local storage
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
+                icon.classList.remove('bi-moon-stars-fill');
+                icon.classList.add('bi-sun-fill');
+            }
+
+            toggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('bi-moon-stars-fill');
+                    icon.classList.add('bi-sun-fill');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('bi-sun-fill');
+                    icon.classList.add('bi-moon-stars-fill');
+                }
+            });
+
+            // === Gallery Modal Logic ===
+            const galleryModal = document.getElementById('galleryModal');
+            galleryModal.addEventListener('show.bs.modal', function (event) {
+                const triggerElement = event.relatedTarget;
+                const imageSrc = triggerElement.getAttribute('data-img-src');
+                const modalImage = galleryModal.querySelector('#modalImage');
+                modalImage.src = imageSrc;
+            });
+            
+            // === Copyright Year Logic ===
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+            // === Animate on Scroll (Intersection Observer) ===
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            fadeInElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+             // === Active Nav Link on Scroll ===
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            let currentSection = 'home';
+
+            window.addEventListener('scroll', () => {
+                sections.forEach(section => {
+                    if (window.scrollY >= (section.offsetTop - 100)) {
+                        currentSection = section.id;
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(currentSection)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
